@@ -1,0 +1,17 @@
+import pandas as pd
+def model(dbt, session):
+    # Log the start of the model execution
+    dbt.logger.info("March Madness Data Model...")
+
+    nba_table = dbt.source("TEAM", "CLOSE TWOS FG%")
+    
+    df = session.table(nba_table).to_pandas()
+
+    dbt.logger.info(f" {df.shape[0]} rows {df.shape[1]} columns.")
+
+    # Return the DataFrame
+    return df
+data = pd.read_csv('C:/Users/vgkam/Downloads/KaggleData/Shooting Splits.csv')
+print(data)
+
+#dbt run --models Shooting Splits
